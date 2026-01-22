@@ -1,0 +1,16 @@
+<div th:fragment="confirmModal(id)"
+     th:id="${id}"
+     class="modal-overlay hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 data-modal-title></h3>
+        </div>
+        <div class="modal-body">
+            <p data-modal-message></p>
+        </div>
+        <div class="modal-footer">
+            <button data-modal-confirm>확인</button>
+            <button data-modal-cancel>취소</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:replace="~{::title}">Layout</title>
+    <link rel="stylesheet" href="/css/modal.css">
+</head>
+
+<body th:fragment="layout">
+
+<main>
+    <div th:replace="~{::content}"></div>
+</main>
+<div id="modal-templates" style="display:none">
+    <div th:replace="~{fragments/modal/modal-templates :: confirmModal('confirmModal')}"></div>
+</div>
+
+<div id="modal-container"></div>
+
+<div th:replace="~{::pageScripts}"></div>
+
+<script th:src="@{/js/common/modal.js}"></script>
+</body>
+</html>

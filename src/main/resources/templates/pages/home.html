@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout}">
+
+<title>Home</title>
+
+<div th:fragment="content">
+    <button
+            data-modal="confirmModal"
+            data-title="삭제 확인"
+            data-message="정말 삭제하시겠습니까?"
+            onclick="openModal(this)">
+        확인 모달 열기
+    </button>
+</div>
+
+<div th:fragment="pageScripts">
+    <script th:src="@{/js/pages/home.js}"></script>
+</div>
+
+</html>
