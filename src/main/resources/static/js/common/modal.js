@@ -13,19 +13,24 @@ const Modal = (() => {
             console.error("#modal-container not found");
             return;
         }
-
+        // 기존 모달 제거
         if (currentModal) {
             currentModal.remove();
             currentModal = null;
         }
 
-        const clone = template.cloneNode(true);
-        clone.classList.remove("hidden");
-        clone.style.display = "block";
+        // template 태그인지 확인
+        let clone;
+        if (template.tagName === "TEMPLATE") {
+            clone = template.content.cloneNode(true);
+        } else {
+            clone = template.cloneNode(true);
+        }
+
         bindData(clone, data);
 
         container.appendChild(clone);
-        currentModal = clone;
+        currentModal = container.lastElementChild;
     }
 
     function close() {
@@ -56,3 +61,6 @@ const Modal = (() => {
 
     return { open, close };
 })();
+
+
+window.Modal = Modal;

@@ -2,23 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/modal.css}">
     <title th:replace="~{::title}">Layout</title>
-    <link rel="stylesheet" href="/css/modal.css">
 </head>
-
 <body th:fragment="layout">
+
+<header>공통 헤더</header>
 
 <main>
     <div th:replace="~{::content}"></div>
 </main>
+
+<!-- modal templates (숨김) -->
 <div id="modal-templates" style="display:none">
-    <div th:replace="~{fragments/modal/modal-templates :: confirmModal('confirmModal')}"></div>
+    <div th:replace="~{fragments/modal/modal-templates :: confirmModal}"></div>
 </div>
 
+<!-- 모달이 실제로 표시되는 영역 -->
 <div id="modal-container"></div>
 
-<div th:replace="~{::pageScripts}"></div>
-
+<!-- 공통 JS -->
 <script th:src="@{/js/common/modal.js}"></script>
+
+<!-- 페이지별 JS -->
+<div th:replace="~{::pageScripts}"></div>
+<script>
+    console.log("layout loaded");
+</script>
+
 </body>
 </html>
