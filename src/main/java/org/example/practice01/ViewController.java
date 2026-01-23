@@ -1,7 +1,12 @@
 package org.example.practice01;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class ViewController {
@@ -10,8 +15,28 @@ public class ViewController {
 
         @GetMapping("/")
         public String home() {
-            return "pages/home";
+            return "pages/userDetail";
         }
 
+    @GetMapping("/users/detail/{id}")
+    public String getUserDetail(@PathVariable("id") Long id, Model model) {
+
+        // VO 대신 Map을 사용하여 임시 데이터 생성
+        Map<String, Object> user = new HashMap<>();
+        user.put("id", id);
+
+        // id 값에 따라 이름을 다르게 설정 (파라미터 전달 확인용)
+        if (id == 1) {
+            user.put("name", "홍길동");
+            user.put("email", "hong@test.com");
+        } else {
+            user.put("name", "이순신");
+            user.put("email", "lee@test.com");
+        }
+
+        model.addAttribute("user", user);
+        // "파일경로 :: 프래그먼트이름" 형식으로 반환
+        return "fragments/modal/modal-templates :: user-detail-modal";
+    }
 
 }

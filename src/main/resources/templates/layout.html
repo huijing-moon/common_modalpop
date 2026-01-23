@@ -2,8 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+<!--    <title th:replace="~{::title}">기본 제목</title>-->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/modal.css}">
-    <title th:replace="~{::title}">Layout</title>
+
+
+<!--    <th:block th:replace="~{::head} ?: ~{}"></th:block>-->
 </head>
 <body th:fragment="layout">
 
@@ -13,9 +17,13 @@
     <div th:replace="~{::content}"></div>
 </main>
 
+
+
+
 <!-- modal templates (숨김) -->
 <div id="modal-templates" style="display:none">
     <div th:replace="~{fragments/modal/modal-templates :: confirmModal}"></div>
+    <div th:replace="~{fragments/modal/modal-fragment:: user-detail-modal}"></div>
 </div>
 
 <!-- 모달이 실제로 표시되는 영역 -->

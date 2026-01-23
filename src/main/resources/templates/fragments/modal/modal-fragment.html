@@ -1,0 +1,9 @@
+<div th:fragment="user-detail-modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h3 th:text="${user.name} + '님의 정보'">사용자 정보</h3>
+    <p>이메일: <span th:text="${user.email}">user@example.com</span></p>
+    <p>가입일: <span th:text="${user.regDate}">2023-01-01</span></p>
+    <button type="button" onclick="closeModal()">닫기</button>
+  </div>
+</div>

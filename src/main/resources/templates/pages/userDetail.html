@@ -1,0 +1,22 @@
+<!-- userDetail.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout}">
+
+<div th:fragment="content">
+
+<h2>동적 모달 예제</h2>
+
+<button type="button" onclick="openDynamicModal(1)">1번 유저 정보 보기</button>
+<button type="button" onclick="openDynamicModal(2)">2번 유저 정보 보기</button>
+
+<div id="modalContainer" class="modal"></div>
+
+<div th:fragment="pageScripts">
+    <script th:src="@{/js/pages/userDetail.js}">
+
+        console.log('userDetail 호출!')
+    </script>
+</div>
+</div>
+
