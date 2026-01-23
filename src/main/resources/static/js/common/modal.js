@@ -76,7 +76,19 @@ const Modal = (() => {
         container.innerHTML = ""; // 메모리 정리를 위해 내용 비움
     }
 
+    window.onclick = function(event) {
+        console.log(2222222222)
+        const container = document.getElementById("modalContainer");
+        // 클릭된 대상이 container(어두운 배경) 자체일 경우에만 닫기
+        if (event.target == container) {
+            closeModal();
+        }
+    }
+
+
     return { open, close };
+
+
 })();
 
 
