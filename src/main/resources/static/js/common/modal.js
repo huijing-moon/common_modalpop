@@ -59,6 +59,23 @@ const Modal = (() => {
         document.getElementById("modal-backdrop").classList.add("hidden");
     }
 
+
+    async function openDynamicModal(userId) {
+        // 서버 컨트롤러를 호출하여 HTML 조각(Fragment)을 받아옴
+        const response = await fetch('/users/detail/' + userId);
+        const html = await response.text();
+
+        const container = document.getElementById("modalContainer");
+        container.innerHTML = html; // 레이아웃의 빈 박스에 HTML 주입
+        container.style.display = "block"; // 화면에 표시
+    }
+
+    function closeModal() {
+        const container = document.getElementById("modalContainer");
+        container.style.display = "none";
+        container.innerHTML = ""; // 메모리 정리를 위해 내용 비움
+    }
+
     return { open, close };
 })();
 

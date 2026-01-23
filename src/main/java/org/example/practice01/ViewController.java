@@ -13,10 +13,10 @@ public class ViewController {
 
 
 
-        @GetMapping("/")
-        public String home() {
-            return "pages/userDetail";
-        }
+    @GetMapping("/")
+    public String home() {
+        return "pages/userDetail";
+    }
 
     @GetMapping("/users/detail/{id}")
     public String getUserDetail(@PathVariable("id") Long id, Model model) {
@@ -24,19 +24,24 @@ public class ViewController {
         // VO 대신 Map을 사용하여 임시 데이터 생성
         Map<String, Object> user = new HashMap<>();
         user.put("id", id);
+        System.out.println(user.get("id"));
 
         // id 값에 따라 이름을 다르게 설정 (파라미터 전달 확인용)
         if (id == 1) {
             user.put("name", "홍길동");
             user.put("email", "hong@test.com");
+            user.put("regDate", "2026-01-23");
         } else {
             user.put("name", "이순신");
             user.put("email", "lee@test.com");
+            user.put("regDate", "2026-01-23");
         }
+        System.out.println(user.get("name"));
+
 
         model.addAttribute("user", user);
         // "파일경로 :: 프래그먼트이름" 형식으로 반환
-        return "fragments/modal/modal-templates :: user-detail-modal";
+        return "fragments/modal/modal-fragment :: user-detail-modal";
     }
 
 }

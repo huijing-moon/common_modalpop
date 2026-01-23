@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout">
 <head>
     <meta charset="UTF-8">
-<!--    <title th:replace="~{::title}">기본 제목</title>-->
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <link rel="stylesheet" th:href="@{/css/modal.css}">
-
-
-<!--    <th:block th:replace="~{::head} ?: ~{}"></th:block>-->
 </head>
-<body th:fragment="layout">
+<body>
 
 <header>공통 헤더</header>
 
@@ -18,25 +13,12 @@
 </main>
 
 
-
-
-<!-- modal templates (숨김) -->
-<div id="modal-templates" style="display:none">
-    <div th:replace="~{fragments/modal/modal-templates :: confirmModal}"></div>
-    <div th:replace="~{fragments/modal/modal-fragment:: user-detail-modal}"></div>
-</div>
-
-<!-- 모달이 실제로 표시되는 영역 -->
+<div id="modalContainer" class="modal"></div>
 <div id="modal-container"></div>
+<div id="modal-fragment"></div>
 
-<!-- 공통 JS -->
-<script th:src="@{/js/common/modal.js}"></script>
-
-<!-- 페이지별 JS -->
 <div th:replace="~{::pageScripts}"></div>
-<script>
-    console.log("layout loaded");
-</script>
+<script th:src="@{/js/common/modal.js}"></script>
 
 </body>
 </html>
