@@ -4,6 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +23,11 @@ public class ViewController {
 
     @GetMapping("/users/detail/{id}")
     public String getUserDetail(@PathVariable("id") Long id, Model model) {
+
+        // id == 2 이면 폼 모달 반환
+        if (id == 2) {
+            return "fragments/modal/modal-fragment :: formModal";
+        }
 
         // VO 대신 Map을 사용하여 임시 데이터 생성
         Map<String, Object> user = new HashMap<>();
@@ -42,6 +50,20 @@ public class ViewController {
         model.addAttribute("user", user);
         // "파일경로 :: 프래그먼트이름" 형식으로 반환
         return "fragments/modal/modal-fragment :: user-detail-modal";
+    }
+
+    @PostMapping("/users/save")
+    @ResponseBody
+    public Map<String, Object> saveUser(@RequestParam("userName") String userName,
+                                        @RequestParam("role") String role) {
+        System.out.println("=== 사용자 저장 요청 ===");
+        System.out.println("이름: " + userName);
+        System.out.println("역할: " + role);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+        response.put("message", "사용자가 저장되었습니다.");
+        return response;
     }
 
 }
