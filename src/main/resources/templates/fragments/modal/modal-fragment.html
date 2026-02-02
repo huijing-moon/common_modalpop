@@ -4,6 +4,10 @@
     <h3 th:text="${user.name} + '님의 정보'">사용자 정보</h3>
     <p>이메일: <span th:text="${user.email}">user@example.com</span></p>
     <p>가입일: <span th:text="${user.regDate}">2023-01-01</span></p>
+    <div style="margin-top: 20px;">
+      <button type="button" onclick="onConfirm()">확인</button>
+      <button type="button" onclick="closeModal()">취소</button>
+    </div>
   </div>
 </div>
 
@@ -12,6 +16,32 @@
   <div class="modal-content">
     <h3>사용자 추가</h3>
     <form id="userForm">
+      <div class="form-group">
+        <label>이름:</label>
+        <input type="text" name="userName" required>
+      </div>
+      <div class="form-group">
+        <label>역할:</label>
+        <select name="role">
+          <option value="USER">일반 사용자</option>
+          <option value="ADMIN">관리자</option>
+        </select>
+      </div>
+      <div style="margin-top: 20px;">
+        <button type="button" onclick="saveUser()">저장하기</button>
+        <button type="button" onclick="closeModal()">취소</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<!--체크 모달창 -->
+<div th:fragment="checkModal">
+  <div class="modal-content">
+    <h3>사용자 추가</h3>
+    <form id="checkForm">
       <div class="form-group">
         <label>이름:</label>
         <input type="text" name="userName" required>

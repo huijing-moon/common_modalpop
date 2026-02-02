@@ -29,6 +29,13 @@ public class ViewController {
             return "fragments/modal/modal-fragment :: formModal";
         }
 
+
+        // id == 2 이면 폼 모달 반환
+        if (id == 3) {
+            return "fragments/modal/modal-fragment :: checkModal";
+        }
+
+
         // VO 대신 Map을 사용하여 임시 데이터 생성
         Map<String, Object> user = new HashMap<>();
         user.put("id", id);
