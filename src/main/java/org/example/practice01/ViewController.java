@@ -35,6 +35,16 @@ public class ViewController {
             return "fragments/modal/modal-fragment :: checkModal";
         }
 
+        // id == 4 이면 alert 모달 반환
+        if (id == 4) {
+            return "fragments/modal/modal-fragment :: alertModal";
+        }
+
+        // id == 5 이면 로딩 모달 반환
+        if (id == 5) {
+            return "fragments/modal/modal-fragment :: loadModal";
+        }
+
 
         // VO 대신 Map을 사용하여 임시 데이터 생성
         Map<String, Object> user = new HashMap<>();

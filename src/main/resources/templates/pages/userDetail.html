@@ -5,15 +5,11 @@
 
 <h2>동적 모달 예제</h2>
 
-    <button
-            data-modal="confirmModal"
-            data-title="삭제 확인"
-            data-message="정말 삭제하시겠습니까?"
-            onclick="openModal(this)">
-        확인 모달 열기
-    </button>
-<button type="button" onclick="openDynamicModal(1)">2번 유저 정보 보기</button>
-<button type="button" onclick="openDynamicModal(2)">3번 폼 모달창 보기</button>
+<button type="button" onclick="openDynamicModal(1)">1번 유저 정보 보기</button>
+<button type="button" onclick="openDynamicModal(2)">2번 폼 모달창 보기</button>
+<button type="button" onclick="openDynamicModal(3)">3번 폼 모달창 보기</button>
+<button type="button" onclick="openDynamicModal(4)">4번 alert 모달창 보기</button>
+<button type="button" onclick="openDynamicModal(5)">5번  모달창 보기</button>
 
 <div th:fragment="pageScripts">
 <script th:src="@{/js/pages/userDetail.js}"> </script>
