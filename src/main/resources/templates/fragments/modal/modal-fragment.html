@@ -1,78 +1,117 @@
+<!-- 사용자 상세 정보 모달 -->
 <div th:fragment="user-detail-modal">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
-    <h3 th:text="${user.name} + '님의 정보'">사용자 정보</h3>
-    <p>이메일: <span th:text="${user.email}">user@example.com</span></p>
-    <p>가입일: <span th:text="${user.regDate}">2023-01-01</span></p>
-    <div style="margin-top: 20px;">
-      <button type="button" onclick="onConfirm()">확인</button>
-      <button type="button" onclick="closeModal()">취소</button>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 th:text="${user.name} + '님의 정보'">사용자 정보</h3>
+            <button type="button" class="close-btn" onclick="Modal.close()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="info-row">
+                <span class="info-label">이메일</span>
+                <span class="info-value" th:text="${user.email}">user@example.com</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">가입일</span>
+                <span class="info-value" th:text="${user.regDate}">2023-01-01</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="Modal.close()">닫기</button>
+            <button type="button" class="btn btn-primary" onclick="Modal.close()">확인</button>
+        </div>
     </div>
-  </div>
 </div>
 
-<!--폼 모달창 -->
+<!-- 폼 모달창 -->
 <div th:fragment="formModal">
-  <div class="modal-content">
-    <h3>사용자 추가</h3>
-    <form id="userForm">
-      <div class="form-group">
-        <label>이름:</label>
-        <input type="text" name="userName" required>
-      </div>
-      <div class="form-group">
-        <label>역할:</label>
-        <select name="role">
-          <option value="USER">일반 사용자</option>
-          <option value="ADMIN">관리자</option>
-        </select>
-      </div>
-      <div style="margin-top: 20px;">
-        <button type="button" onclick="saveUser()">저장하기</button>
-        <button type="button" onclick="closeModal()">취소</button>
-      </div>
-    </form>
-  </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>사용자 추가</h3>
+            <button type="button" class="close-btn" onclick="Modal.close()">&times;</button>
+        </div>
+        <form id="userForm">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="userName">이름</label>
+                    <input type="text" id="userName" name="userName" placeholder="이름을 입력하세요" required>
+                </div>
+                <div class="form-group">
+                    <label for="role">역할</label>
+                    <select id="role" name="role">
+                        <option value="USER">일반 사용자</option>
+                        <option value="ADMIN">관리자</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="Modal.close()">취소</button>
+                <button type="button" class="btn btn-success" onclick="Modal.saveUser()">저장하기</button>
+            </div>
+        </form>
+    </div>
 </div>
 
-<!--loading 모달창 -->
-<template id="loadingModal">
-  <div class="modal-content loading">
-    <div class="spinner"></div>
-    <p data-modal-message>로딩 중...</p>
-  </div>
-</template>
+<!-- 로딩 모달창 -->
+<div th:fragment="loadingModal">
+    <div class="modal-content loading">
+        <div class="spinner"></div>
+        <p data-modal-message>로딩 중...</p>
+    </div>
+</div>
 
-
-<!--체크 모달창 -->
+<!-- 체크 모달창 -->
 <div th:fragment="checkModal">
-  <div class="modal-content">
-    <h3>사용자 추가</h3>
-    <form id="checkForm">
-      <div class="form-group">
-        <label>이름:</label>
-        <input type="text" name="userName" required>
-      </div>
-      <div class="form-group">
-        <label>역할:</label>
-        <select name="role">
-          <option value="USER">일반 사용자</option>
-          <option value="ADMIN">관리자</option>
-        </select>
-      </div>
-      <div style="margin-top: 20px;">
-        <button type="button" onclick="saveUser()">저장하기</button>
-        <button type="button" onclick="closeModal()">취소</button>
-      </div>
-    </form>
-  </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>사용자 추가</h3>
+            <button type="button" class="close-btn" onclick="Modal.close()">&times;</button>
+        </div>
+        <form id="checkForm">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="checkUserName">이름</label>
+                    <input type="text" id="checkUserName" name="userName" placeholder="이름을 입력하세요" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkRole">역할</label>
+                    <select id="checkRole" name="role">
+                        <option value="USER">일반 사용자</option>
+                        <option value="ADMIN">관리자</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="Modal.close()">취소</button>
+                <button type="button" class="btn btn-success" onclick="Modal.saveUser()">저장하기</button>
+            </div>
+        </form>
+    </div>
 </div>
 
-<!--alert 모달 취소 버튼이 없음-->
+<!-- Alert 모달 -->
 <div th:fragment="alertModal">
-  <div class="modal-content">
-    <h3 data-modal-title></h3>
-    <p data-modal-message></p>
-    <button data-modal-confirm>확인</button>
-  </div>
+    <div class="modal-content alert-modal">
+        <div class="modal-body">
+            <div class="alert-icon info">!</div>
+            <h3 data-modal-title>알림</h3>
+            <p data-modal-message>메시지가 표시됩니다.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" data-modal-confirm>확인</button>
+        </div>
+    </div>
+</div>
+
+<!-- Confirm 모달 (확인/취소 버튼) -->
+<div th:fragment="confirmModal">
+    <div class="modal-content confirm-modal">
+        <div class="modal-body">
+            <h3 data-modal-title>확인</h3>
+            <p data-modal-message>진행하시겠습니까?</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" data-modal-cancel>취소</button>
+            <button class="btn btn-primary" data-modal-confirm>확인</button>
+        </div>
+    </div>
 </div>

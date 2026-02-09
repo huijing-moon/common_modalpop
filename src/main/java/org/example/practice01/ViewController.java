@@ -42,7 +42,7 @@ public class ViewController {
 
         // id == 5 이면 로딩 모달 반환
         if (id == 5) {
-            return "fragments/modal/modal-fragment :: loadModal";
+            return "fragments/modal/modal-fragment :: loadingModal";
         }
 
 

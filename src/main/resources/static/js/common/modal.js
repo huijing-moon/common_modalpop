@@ -25,15 +25,20 @@ const Modal = (() => {
 
     function close() {
         const el = container();
-        if(!el || modalStack.length == 0) return;
+        if(!el) return;
 
-        //마지막 모달만 제거
-        const lastModal = modalStack.pop();
-        if(lastModal){
-            lastModal.remove();
-        }
-
-        if(modalStack.length == 0){
+        // modalStack에 있으면 스택에서 제거
+        if(modalStack.length > 0) {
+            const lastModal = modalStack.pop();
+            if(lastModal){
+                lastModal.remove();
+            }
+            if(modalStack.length == 0){
+                el.style.display = "none";
+            }
+        } else {
+            // fetch로 열린 모달인 경우 (modalStack에 없음)
+            el.innerHTML = "";
             el.style.display = "none";
         }
     }
@@ -147,24 +152,37 @@ const Modal = (() => {
 
 
     async function saveUser() {
-        Modal.loading("저장 중...");
+
+        //모달 내 폼 찾기
+        const form = container().querySelector("form");
+        if(!form){
+            await alert({title : "오류",  message: "폼을 찾을 수 없습니다."});
+            return;
+        }
+
+        const formData = new FormData(form)
+        loading("저장 중...");
 
         try {
-            const response = await fetch("/users/save", { ... });
+            const response = await window.fetch("/users/save", {
+                        method : "POST",
+                        body: formData
+            })
             const result = await response.json();
 
-            Modal.close();
+
+            close();
 
             if (result.success) {
-                await Modal.alert({ title: "완료", message: result.message });
+                await alert({ title: "완료", message: result.message });
             }
         } catch (error) {
-            Modal.close();
-            await Modal.alert({ title: "오류", message: "저장 실패" });
+            close();
+            await alert({ title: "오류", message: "저장 실패" });
         }
     }
 
-    return { open, fetch, close , closeAll, confirm, alert, loading};
+    return { open, fetch, close, closeAll, confirm, alert, loading, saveUser };
 
 
 })();
